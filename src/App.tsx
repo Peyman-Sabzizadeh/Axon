@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import PageNotFound from "./pages/PageNotFound";
 import User from "./pages/User";
+import AppLayout from "./ui/AppLayout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,11 +23,13 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-          <Route index element={<Navigate replace to="users" />} />
-          <Route path="users" element={<Users />} />
-          <Route path="users/:userId" element={<User />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="profile" element={<Profile />} />
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="users" />} />
+            <Route path="users" element={<Users />} />
+            <Route path="users/:userId" element={<User />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="*" element={<PageNotFound />} />
