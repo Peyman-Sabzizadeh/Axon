@@ -5,7 +5,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 function AppLayout() {
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <div className="font-nunito flex h-screen">
         <AppSidebar />
       </div>

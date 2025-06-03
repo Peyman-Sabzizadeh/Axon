@@ -33,13 +33,13 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const { toggleSidebar } = useSidebar();
+  const { open, setOpen } = useSidebar();
   return (
     <Sidebar variant="floating" collapsible="icon" className="w-[10%]">
       <SidebarContent
-        onClick={() => {
-          toggleSidebar();
-        }}
+        className="rounded-lg bg-indigo-100"
+        onMouseEnter={() => !open && setOpen(true)}
+        onMouseLeave={() => open && setOpen(false)}
       >
         <SidebarGroup>
           <SidebarGroupLabel>Axon menu</SidebarGroupLabel>
