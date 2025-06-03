@@ -7,3 +7,18 @@ export async function getSettings() {
   }
   return Settings;
 }
+export async function updateSetting(newSetting: {
+  [key: string]: number | string;
+}) {
+  const { data: Setting, error } = await supabase
+    .from("Settings")
+    .update(newSetting)
+    // There is only ONE row of settings, and it has the ID=1, and so this is the updated one
+    .eq("id", 1)
+    .select();
+  if (error) {
+    console.error(error);
+    throw new Error("Setting could not be updated");
+  }
+  return Setting;
+}
