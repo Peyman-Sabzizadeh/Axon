@@ -1,4 +1,4 @@
-import { LayoutDashboard, Settings, User } from "lucide-react";
+import { LayoutDashboard, LogOut, Settings, User } from "lucide-react";
 
 import {
   Sidebar,
@@ -30,6 +30,11 @@ const items = [
     url: "/settings",
     icon: Settings,
   },
+  {
+    title: "Logout",
+    url: "/login",
+    icon: LogOut,
+  },
 ];
 
 export function AppSidebar() {
@@ -47,7 +52,14 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    className={
+                      item.title === "Logout"
+                        ? "text-red-500 hover:bg-red-400 hover:text-amber-50"
+                        : ""
+                    }
+                    asChild
+                  >
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
