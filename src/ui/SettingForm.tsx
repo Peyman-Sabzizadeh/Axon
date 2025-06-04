@@ -1,22 +1,27 @@
-import type React from "react";
 import { useSettings } from "@/hooks/useSettings";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useUpdateSetting } from "@/hooks/useUpdateSetting";
 
 function SettingForm() {
   const { Settings } = useSettings();
   const setting = Settings?.at(0);
   const user_per_page = setting?.user_per_page || "";
-  const [userPerPage, setUserPerPage] = useState();
+  const [userPerPage, setUserPerPage] = useState<number | string>("");
   useEffect(
     function () {
       if (setting?.user_per_page) setUserPerPage(user_per_page);
     },
     [setting, user_per_page],
   );
+  const { updateSetting, isUpdating } = useUpdateSetting();
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    updateSetting(userPerPage);
+  }
   return (
-    <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+    <form className="space-y-3" onSubmit={handleSubmit}>
       <h3>User per page</h3>
       <Input
         type="number"

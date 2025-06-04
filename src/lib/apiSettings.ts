@@ -7,12 +7,10 @@ export async function getSettings() {
   }
   return Settings;
 }
-export async function updateSetting(newSetting: {
-  [key: string]: number | string;
-}) {
+export async function updateSetting(newSetting: number | string | undefined) {
   const { data: Setting, error } = await supabase
     .from("Settings")
-    .update(newSetting)
+    .update({ ["user_per_page"]: Number(newSetting) })
     // There is only ONE row of settings, and it has the ID=1, and so this is the updated one
     .eq("id", 1)
     .select();
