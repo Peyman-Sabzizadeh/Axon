@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useUpdateSetting } from "@/hooks/useUpdateSetting";
 
 function SettingForm() {
-  const { Settings } = useSettings();
+  const { Settings, isPending: isLoadingSetting } = useSettings();
   const setting = Settings?.at(0);
   const user_per_page = setting?.user_per_page || "";
   const [userPerPage, setUserPerPage] = useState<number | string>("");
@@ -28,9 +28,13 @@ function SettingForm() {
         className="w-48"
         placeholder="ex : 5"
         value={userPerPage}
+        disabled={isLoadingSetting || isUpdating}
         onChange={(e) => setUserPerPage(e.target.value)}
       />
-      <Button className="cursor-pointer bg-indigo-500 hover:bg-indigo-600">
+      <Button
+        disabled={isLoadingSetting || isUpdating}
+        className="cursor-pointer bg-indigo-500 hover:bg-indigo-600"
+      >
         Submit
       </Button>
     </form>

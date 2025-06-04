@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useUpdateSetting() {
   const queryClient = useQueryClient();
-  const { mutate: updateSetting, isLoading: isUpdating } = useMutation({
+  const { mutate: updateSetting, isPending: isUpdating } = useMutation({
     mutationFn: updateSettingApi,
     onSuccess: () => {
       alert("Setting updated");
