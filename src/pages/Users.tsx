@@ -1,4 +1,9 @@
+import { useUsers } from "@/hooks/useUsers";
+import Table from "@/ui/Table";
+
 function Users() {
-  return <h1>Users</h1>;
+  const { Users } = useUsers();
+  console.log(Users);
+  return <Table />;
 }
 export default Users;
