@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useEffect, useState } from "react";
 import { useUpdateSetting } from "@/hooks/useUpdateSetting";
+import Spinner from "./Spinner";
 
 function SettingForm() {
   const { Settings, isPending: isLoadingSetting } = useSettings();
@@ -23,20 +24,26 @@ function SettingForm() {
   return (
     <form className="space-y-3" onSubmit={handleSubmit}>
       <h3>User per page</h3>
-      <Input
-        type="number"
-        className="w-48"
-        placeholder="ex : 5"
-        value={userPerPage}
-        disabled={isLoadingSetting || isUpdating}
-        onChange={(e) => setUserPerPage(e.target.value)}
-      />
-      <Button
-        disabled={isLoadingSetting || isUpdating}
-        className="cursor-pointer bg-indigo-500 hover:bg-indigo-600"
-      >
-        Submit
-      </Button>
+      {!isLoadingSetting && !isUpdating ? (
+        <div className="space-y-3">
+          <Input
+            type="number"
+            className="w-48"
+            placeholder="ex : 5"
+            value={userPerPage}
+            disabled={isLoadingSetting || isUpdating}
+            onChange={(e) => setUserPerPage(e.target.value)}
+          />
+          <Button
+            disabled={isLoadingSetting || isUpdating}
+            className="cursor-pointer bg-indigo-500 hover:bg-indigo-600"
+          >
+            Submit
+          </Button>
+        </div>
+      ) : (
+        <Spinner />
+      )}
     </form>
   );
 }
