@@ -1,29 +1,27 @@
-import { useUsers } from "@/hooks/useUsers";
 import TableRow from "./TableRow";
 import { Error } from "./Error";
 import Spinner from "./Spinner";
 
-function Table() {
-  const { Users, isPending, error } = useUsers();
+function Table({ Users, isPending, error }) {
   if (error) return <Error>There was an error while fetching data</Error>;
   if (isPending) return <Spinner />;
   return (
-    <div className="overflow-x-auto rounded-lg font-nunito">
+    <div className="font-nunito overflow-x-auto rounded-lg">
       <table className="text-left">
         <thead className="bg-violet-100">
-          <tr>
-            <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Age</th>
-            <th className="px-4 py-2">Job</th>
-            <th className="px-4 py-2">Income</th>
-            <th className="px-4 py-2">Country</th>
-            <th className="px-4 py-2">Gender</th>
-            <th className="px-4 py-2">National ID</th>
-            <th className="px-4 py-2">Married</th>
-            <th className="px-4 py-2">Child</th>
-            <th className="px-4 py-2">Image</th>
-            <th className="px-4 py-2">Role</th>
+          <tr className="*:px-4 *:py-2">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Job</th>
+            <th>Income</th>
+            <th>Country</th>
+            <th>Gender</th>
+            <th>National ID</th>
+            <th>Married</th>
+            <th>Child</th>
+            <th>Image</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
