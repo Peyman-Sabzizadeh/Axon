@@ -23,9 +23,9 @@ function SettingForm() {
   }
   return (
     <form className="space-y-3" onSubmit={handleSubmit}>
-      <h3>User per page</h3>
       {!isLoadingSetting && !isUpdating ? (
         <div className="space-y-3">
+          <h3>User per page</h3>
           <Input
             type="number"
             className="w-48"

@@ -11,7 +11,7 @@ function AppLayout() {
       </div>
       <div className="flex flex-1 flex-col p-3">
         <Header />
-        <main className="mt-4 font-nunito">
+        <main className="mt-4 font-nunito flex items-center justify-center">
           <Outlet />
         </main>
       </div>

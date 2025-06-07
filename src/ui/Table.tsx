@@ -1,10 +1,13 @@
-import TableRow from "./TableRow";
+import TableRow, { type User } from "./TableRow";
 import { Error } from "./Error";
-import Spinner from "./Spinner";
 
-function Table({ Users, isPending, error }) {
+type TableProps = {
+  Users: User[] | undefined;
+  error: unknown;
+};
+
+function Table({ Users, error }: TableProps) {
   if (error) return <Error>There was an error while fetching data</Error>;
-  if (isPending) return <Spinner />;
   return (
     <div className="font-nunito overflow-x-auto rounded-lg">
       <table className="text-left">
