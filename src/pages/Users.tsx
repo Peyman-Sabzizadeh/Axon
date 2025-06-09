@@ -1,5 +1,5 @@
 import { useUsers } from "@/hooks/useUsers";
-import FilterSection from "@/ui/Filters";
+import FilterSection from "@/ui/FilterSection";
 import SearchInput from "@/ui/SearchInput";
 import Spinner from "@/ui/Spinner";
 import Table from "@/ui/Table";
