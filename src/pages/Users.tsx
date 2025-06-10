@@ -1,6 +1,7 @@
 import { useUsers } from "@/hooks/useUsers";
 import Filters from "@/ui/Filters";
 import FilterSection from "@/ui/FilterSection";
+import PaginationUi from "@/ui/PaginationUi";
 import SearchInput from "@/ui/SearchInput";
 import SortSection from "@/ui/SortSection";
 import Spinner from "@/ui/Spinner";
@@ -64,7 +65,8 @@ function Users() {
         <FilterSection filters={filters} setFilters={setFilters} />
         <SortSection sortBy={sortBy} setSortBy={setSortBy} />
       </Filters>
-      <Table Users={sortedUsers} error={error} />
+      {/* <Table Users={sortedUsers} error={error} /> */}
+      <PaginationUi />
     </div>
   );
 }
