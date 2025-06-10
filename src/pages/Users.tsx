@@ -1,4 +1,5 @@
 import { useUsers } from "@/hooks/useUsers";
+import Filters from "@/ui/Filters";
 import FilterSection from "@/ui/FilterSection";
 import SearchInput from "@/ui/SearchInput";
 import SortSection from "@/ui/SortSection";
@@ -58,9 +59,11 @@ function Users() {
   if (isPending) return <Spinner />;
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <FilterSection filters={filters} setFilters={setFilters} />
-      <SortSection sortBy={sortBy} setSortBy={setSortBy} />
+      <Filters>
+        <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <FilterSection filters={filters} setFilters={setFilters} />
+        <SortSection sortBy={sortBy} setSortBy={setSortBy} />
+      </Filters>
       <Table Users={sortedUsers} error={error} />
     </div>
   );
