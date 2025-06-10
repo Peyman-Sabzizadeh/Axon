@@ -1,3 +1,4 @@
+import { useSettings } from "@/hooks/useSettings";
 import { useUsers } from "@/hooks/useUsers";
 import Filters from "@/ui/Filters";
 import FilterSection from "@/ui/FilterSection";
@@ -7,8 +8,13 @@ import SortSection from "@/ui/SortSection";
 import Spinner from "@/ui/Spinner";
 import Table from "@/ui/Table";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function Users() {
+  const [searchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const currentPage = isNaN(page) || page < 1 ? 1 : page;
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     country: "",
@@ -22,6 +28,8 @@ function Users() {
   }>({ field: "", order: "asc" });
 
   const { Users, isPending, error } = useUsers();
+  const { Settings } = useSettings();
+  const userPerPage = Settings?.at(0).user_per_page;
   const filteredUsers = Users?.filter((user) => {
     const matchesSearch = user.name
       .toLowerCase()
@@ -56,6 +64,10 @@ function Users() {
     if (sortBy.order === "asc") return aValue - bValue;
     else return bValue - aValue;
   });
+  const pagedUsers = sortedUsers.slice(
+    (currentPage - 1) * userPerPage,
+    currentPage * userPerPage,
+  );
 
   if (isPending) return <Spinner />;
   return (
@@ -65,8 +77,11 @@ function Users() {
         <FilterSection filters={filters} setFilters={setFilters} />
         <SortSection sortBy={sortBy} setSortBy={setSortBy} />
       </Filters>
-      {/* <Table Users={sortedUsers} error={error} /> */}
-      <PaginationUi />
+      <Table Users={pagedUsers} error={error} />
+      <PaginationUi
+        totalItems={sortedUsers?.length}
+        userPerPage={userPerPage}
+      />
     </div>
   );
 }
